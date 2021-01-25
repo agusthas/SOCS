@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "[WSLinux] C/C++: gcc-9 build active file",
+      "command": "/usr/bin/gcc-9",
+      "args": ["-g", "-Wall", "${file}", "-o", "${fileDirname}/a"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Using gcc-9 compiler in Linux environment"
+    }
+  ]
+}
