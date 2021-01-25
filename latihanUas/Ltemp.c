@@ -93,30 +93,46 @@ void solve() {
         printf("%lld\n", sum);
       } else if ((l >= arr[0] && l <= arr[N - 1]) && r > arr[N - 1]) {
         ll left = leftmost(arr, N, l);
-        for (ll j = left; j < N; j++) {
-          sum += arr[j];
+        if (left == -1) {
+          printf("0\n");
+        } else {
+          for (ll j = left; j < N; j++) {
+            sum += arr[j];
+          }
+          printf("%lld\n", sum);
         }
-        printf("%lld\n", sum);
       } else if (l < arr[0] && (r >= arr[0] && r <= arr[N - 1])) {
         ll right = rightmost(arr, N, r);
-        for (ll j = 0; j <= right; j++) {
-          sum += arr[j];
+        if (right == -1) {
+          printf("0\n");
+        } else {
+          for (ll j = 0; j <= right; j++) {
+            sum += arr[j];
+          }
+          printf("%lld\n", sum);
         }
-        printf("%lld\n", sum);
       } else if ((l >= arr[0] && l <= arr[N - 1]) &&
                  (r >= arr[0] && r <= arr[N - 1])) {
         ll left = leftmost(arr, N, l);
-        for (ll j = left; arr[j] <= r; j++) {
-          sum += arr[j];
+        if (left == -1) {
+          printf("0\n");
+        } else {
+          for (ll j = left; arr[j] <= r; j++) {
+            sum += arr[j];
+          }
+          printf("%lld\n", sum);
         }
-        printf("%lld\n", sum);
       } else if (l == r) {
         ll left = leftmost(arr, N, l);
         ll right = rightmost(arr, N, r);
-        for (ll j = left; j <= right; j++) {
-          sum += arr[j];
+        if (left == -1 || right == -1) {
+          printf("0\n");
+        } else {
+          for (ll j = left; j <= right; j++) {
+            sum += arr[j];
+          }
+          printf("%lld\n", sum);
         }
-        printf("%lld\n", sum);
       }
     }
   }
