@@ -19,23 +19,16 @@ int main() {
   scanf("%d", &t);
   int i = 0;
   while (i < t) {
-    printf("Case #%d: ", i + 1);
+    printf("Case #%d:\n", i + 1);
     solve();
     i++;
   }
   return 0;
 }
 
-void bubbleSort(ll *arr, ll n) {
-  for (int i = 0; i < n - 1; i++) {
-    for (int j = i + 1; j < n; j++) {
-      if (arr[i] > arr[j]) {
-        ll temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-      }
-    }
-  }
+int myCompa(const void *a, const void *b) {
+  if (*(const long long int *)a < *(const long long int *)b) return -1;
+  return *(const long long int *)a > *(const long long int *)b;
 }
 
 ll leftmost(ll *arr, ll n, ll key) {
@@ -87,11 +80,7 @@ void solve() {
   for (int i = 0; i < N; i++) {
     scanf("%lld", &arr[i]);
   }
-  bubbleSort(arr, N);
-  for (int i = 0; i < N; i++) {
-    printf("%lld ", arr[i]);
-  }
-  ENDL;
+  qsort(arr, N, sizeof(long long int), myCompa);
 
   ll q;
   scanf("%lld", &q);
@@ -101,39 +90,23 @@ void solve() {
 
     ll leftIDX = leftmost(arr, N, l);
     ll rightIDX = rightmost(arr, N, r);
-    printf("\nl = %lld\tr =%lld\n", l, r);
-    // printf("bin_L = %lld\tbin_R = %lld\n", leftIDX, rightIDX);
-    // ENDL;
+
     if (l > r) {
-      puts("L > R");
       printf("0\n");
-    } else if (r > l) {
-      if (l > arr[N - 1]) {
-        puts("l too big");
-        printf("0\n");
-      } else if (r < arr[0]) {
-        puts("r too small");
+    } else if (r >= l) {
+      if (l > arr[N - 1] || r < arr[0]) {
         printf("0\n");
       } else if (l < arr[0] && r >= arr[N - 1]) {
-        puts("l is too small and right is too big");
         printf("%lld\n", total(arr, 0, N - 1));
       } else if (l >= arr[0] && r > arr[N - 1]) {
-        puts("l is inside the range, but r is too big");
         printf("%lld\n", total(arr, leftIDX, N - 1));
       } else if (l < arr[0] && r <= arr[N - 1]) {
-        puts("l is too small, but r is in range");
         printf("%lld\n", total(arr, 0, rightIDX));
       } else if (l >= arr[0] && r <= arr[N - 1]) {
-        puts("both l and r is in range");
         printf("%lld\n", total(arr, leftIDX, rightIDX));
       } else {
-        puts("l === r");
         printf("%lld\n", total(arr, leftIDX, rightIDX));
       }
-    } else {
-      puts("l === r");
-      printf("%lld\n", total(arr, leftIDX, rightIDX));
     }
   }
-  ENDL;
 }
