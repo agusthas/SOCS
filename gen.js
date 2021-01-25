@@ -5,12 +5,13 @@ function genRandArr(min, max, len = 1) {
   );
 }
 
-const rangeGenerator = function* (start, end, step = 1) {
-  let i = start;
-  while (i < end) {
-    yield i;
-    i += step;
+export const rangeGeneratorArr = function (start, end, step = 1) {
+  let arr = [];
+  for (let i = start; i < end; i += step) {
+    arr.push(i);
   }
+
+  return arr;
 };
 
 const genIntInRange = (min, max) =>
