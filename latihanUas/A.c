@@ -26,6 +26,34 @@ int main() {
   return 0;
 }
 
+typedef struct {
+  char id[50];
+  char time[8];
+  char dest[500];
+} data;
+
 void solve() {
-  // TODO: KERJAIN
+  int n;
+  scanf("%d", &n);
+  data trains[n + 2];
+  for (int i = 0; i < n; i++) {
+    getchar();
+    scanf("%s %s", trains[i].id, trains[i].time);
+  }
+
+  for (int i = 0; i < n; i++) {
+    char temp[150], temp1[1005];
+    getchar();
+    scanf("%[^ ] %[^\n]", temp, temp1);
+    for (int j = 0; j < n; j++) {
+      if (strcmp(temp, trains[j].id) == 0) {
+        strcpy(trains[j].dest, temp1);
+        break;
+      }
+    }
+  }
+
+  for (int i = 0; i < n; i++) {
+    printf("%s %s %s\n", trains[i].id, trains[i].time, trains[i].dest);
+  }
 }
