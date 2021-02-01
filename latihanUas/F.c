@@ -26,21 +26,39 @@ int main() {
   return 0;
 }
 
-// TODO: BELUM
+ll binser(ll *arr, ll current, ll l, ll r, ll key, ll len) {
+  while (l <= r) {
+    ll mid = l + (r - l) / 2;
+    if (arr[mid] + current <= key && arr[mid + 1] + current > key &&
+        mid != len - 1) {
+      return mid;
+    } else if (arr[mid] + current <= key && mid == len - 1) {
+      return mid;
+    } else if (arr[mid] + current <= key && arr[mid + 1] + current <= key &&
+               mid != len - 1) {
+      l = mid + 1;
+    } else if (arr[mid] + current > key) {
+      r = mid - 1;
+    }
+  }
+
+  return -1;
+}
+
 void solve() {
-  ll n, m;
-  scanf("%lld %lld", &n, &m);
+  ll n, k;
+  scanf("%lld %lld", &n, &k);
   ll arr[n + 5];
-  for (ll i = 0; i < n; i++) {
+  for (int i = 0; i < n; i++) {
     scanf("%lld", &arr[i]);
   }
 
   ll max = -1;
-  for (ll i = 0; i < n - 1; i++) {
-    for (ll j = i + 1; j < n; j++) {
-      ll sum = arr[i] + arr[j];
-      if (m > sum) {
-        max = sum;
+  for (int i = 0; i < n; i++) {
+    ll bin = binser(arr, arr[i], 0, n - 1, k, n);
+    if (bin >= 0 && bin != i) {
+      if (max < arr[bin] + arr[i]) {
+        max = arr[bin] + arr[i];
       }
     }
   }
